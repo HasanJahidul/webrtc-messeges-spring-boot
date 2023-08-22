@@ -1,4 +1,4 @@
-package com.jahidulhasan.messages;
+package com.arits.messages;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

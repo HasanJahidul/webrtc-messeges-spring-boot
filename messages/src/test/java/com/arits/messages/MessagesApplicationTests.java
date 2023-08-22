@@ -1,4 +1,4 @@
-package com.jahidulhasan.messages;
+package com.arits.messages;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
