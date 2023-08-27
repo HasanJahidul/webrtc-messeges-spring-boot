@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -13,11 +14,13 @@ import java.time.LocalDateTime;
 @Setter
 @MappedSuperclass
 public abstract class BaseEntity implements Serializable{
+
+
     @Id
+    @Field("_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     @JsonView({Views.Public.class, Views.Summary.class})
-    private Long id;
+    private String id;
 
 
     @Column(name = "created_at")

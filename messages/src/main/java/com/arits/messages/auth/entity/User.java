@@ -5,9 +5,10 @@ import com.arits.messages.views.Views;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import lombok.Getter;
 
-@Getter
+@Entity
 public class User extends BaseEntity {
     @Column(name= "email")
     @JsonView({Views.Public.class, Views.Summary.class, Views.Internal.class})

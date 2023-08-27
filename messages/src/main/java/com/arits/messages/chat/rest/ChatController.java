@@ -1,13 +1,32 @@
 package com.arits.messages.chat.rest;
 
+import com.arits.messages.chat.ChatMessage;
+import com.arits.messages.views.Views;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
+import org.springframework.stereotype.Controller;
 
+@Controller
 public class ChatController {
-//    @Autowired
-//    private SimpMessagingTemplate simpMessagingTemplate;
-//
-//    @MessageMapping("/chat")
-//    public void chat(String message) {
-//        this.simpMessagingTemplate.convertAndSend("/topic/chat", message);
-//    }
+
+    @MessageMapping("/chat.sendMessage")
+    @SendTo("/topic/public")
+    public ChatMessage sendMessage(
+            @Payload ChatMessage chatMessage
+    ){
+        return chatMessage;
+    }
+    @MessageMapping("/chat.addUser")
+    @SendTo("/topic/public")
+    public ChatMessage AddUser(
+            @Payload ChatMessage chatMessage,
+            SimpMessageHeaderAccessor headerAccessor
+    ){
+//        Add username in web socket session
+        headerAccessor.getSessionAttributes().put("username", chatMessage.getSender());
+        return chatMessage;
+    }
 }
